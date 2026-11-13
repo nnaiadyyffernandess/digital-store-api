@@ -3,6 +3,8 @@ const express = require('express')
 const userRoutes = require('./routes/userRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./docs/swagger')
 
 const app = express()
 
@@ -16,6 +18,8 @@ app.use('/media', express.static(path.join(__dirname, '..', 'public', 'media')))
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' })
 })
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/v1/user', userRoutes)
 app.use('/v1/category', categoryRoutes)
