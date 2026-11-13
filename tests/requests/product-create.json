@@ -1,0 +1,35 @@
+{
+  "enabled": true,
+  "name": "Tênis Nike Air Force",
+  "slug": "tenis-nike-air-force",
+  "stock": 10,
+  "description": "Tênis clássico, confortável e resistente.",
+  "price": 119.9,
+  "price_with_discount": 99.9,
+  "category_ids": [1, 3],
+  "images": [
+    {
+      "type": "image/png",
+      "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+    },
+    {
+      "type": "image/png",
+      "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+    }
+  ],
+  "options": [
+    {
+      "title": "Tamanho",
+      "shape": "square",
+      "radius": "4px",
+      "type": "text",
+      "values": ["39", "40", "41"]
+    },
+    {
+      "title": "Cor",
+      "shape": "circle",
+      "type": "color",
+      "values": ["#000", "#333"]
+    }
+  ]
+}

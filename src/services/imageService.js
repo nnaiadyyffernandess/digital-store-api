@@ -1,0 +1,54 @@
+const fs = require('fs/promises')
+const path = require('path')
+const { randomUUID } = require('crypto')
+
+// Pasta onde as imagens enviadas em base64 são salvas
+const MEDIA_DIR = path.join(__dirname, '..', '..', 'public', 'media')
+
+// Tipos de imagem aceitos e a extensão de arquivo de cada um
+const EXTENSIONS = {
+  'image/png': 'png',
+  'image/jpg': 'jpg',
+  'image/jpeg': 'jpg',
+  'image/gif': 'gif',
+  'image/webp': 'webp',
+}
+
+const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/
+
+// Remove o prefixo "data:image/png;base64," caso ele venha junto
+function cleanBase64(content) {
+  return content.replace(/^data:[^;]+;base64,/, '').replace(/\s/g, '')
+}
+
+// Confere se uma imagem ({ type, content }) é válida; devolve a mensagem de erro ou null
+function validateImage(image) {
+  if (!image || typeof image.type !== 'string' || !EXTENSIONS[image.type]) {
+    return 'Tipo de imagem inválido (use png, jpg, jpeg, gif ou webp)'
+  }
+  if (typeof image.content !== 'string' || !BASE64_REGEX.test(cleanBase64(image.content))) {
+    return 'O conteúdo da imagem deve estar em base64'
+  }
+  return null
+}
+
+// Salva a imagem no disco e devolve o nome do arquivo (que é guardado no banco)
+async function saveBase64Image(image) {
+  await fs.mkdir(MEDIA_DIR, { recursive: true })
+  const filename = `${randomUUID()}.${EXTENSIONS[image.type]}`
+  const buffer = Buffer.from(cleanBase64(image.content), 'base64')
+  await fs.writeFile(path.join(MEDIA_DIR, filename), buffer)
+  return filename
+}
+
+// Apaga uma imagem do disco (ignora se o arquivo não existir mais)
+async function deleteImageFile(filename) {
+  await fs.rm(path.join(MEDIA_DIR, path.basename(filename)), { force: true })
+}
+
+// Monta a URL pública da imagem
+function imageUrl(baseUrl, filename) {
+  return `${baseUrl}/media/${filename}`
+}
+
+module.exports = { MEDIA_DIR, validateImage, saveBase64Image, deleteImageFile, imageUrl }
