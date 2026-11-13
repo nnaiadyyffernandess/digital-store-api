@@ -1,0 +1,13 @@
+{
+  "name": "Camiseta Adidas Básica Premium",
+  "slug": "camiseta-adidas-basica",
+  "price": 89.9,
+  "price_with_discount": 69.9,
+  "images": [
+    { "type": "image/png", "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" }
+  ],
+  "options": [
+    { "id": 5, "values": ["PP", "M", "G", "GG"] },
+    { "title": "Cor", "shape": "circle", "radius": 0, "type": "color", "values": ["#000", "#fff"] }
+  ]
+}

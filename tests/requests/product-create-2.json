@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Camiseta Adidas Básica",
+  "slug": "camiseta-adidas-basica",
+  "stock": 25,
+  "description": "Camiseta de algodão, leve e confortável.",
+  "price": 79.9,
+  "price_with_discount": 59.9,
+  "category_ids": [1],
+  "options": [
+    { "title": "Tamanho", "shape": "square", "radius": 4, "type": "text", "values": ["PP", "M", "GG"] }
+  ]
+}

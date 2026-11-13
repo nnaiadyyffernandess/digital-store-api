@@ -21,10 +21,16 @@ function cleanBase64(content) {
   return content.replace(/^data:[^;]+;base64,/, '').replace(/\s/g, '')
 }
 
-// Confere se uma imagem ({ type, content }) é válida; devolve a mensagem de erro ou null
-function validateImage(image) {
-  if (!image || typeof image.type !== 'string' || !EXTENSIONS[image.type]) {
-    return 'Tipo de imagem inválido (use png, jpg, jpeg, gif ou webp)'
+// Confere se uma imagem ({ type, content }) é válida; devolve a mensagem de erro ou null.
+// Com requireType = false (troca de imagem existente), o tipo é opcional.
+function validateImage(image, requireType = true) {
+  if (!image) {
+    return 'Imagem inválida'
+  }
+  if (requireType || image.type !== undefined) {
+    if (typeof image.type !== 'string' || !EXTENSIONS[image.type]) {
+      return 'Tipo de imagem inválido (use png, jpg, jpeg, gif ou webp)'
+    }
   }
   if (typeof image.content !== 'string' || !BASE64_REGEX.test(cleanBase64(image.content))) {
     return 'O conteúdo da imagem deve estar em base64'
@@ -32,10 +38,12 @@ function validateImage(image) {
   return null
 }
 
-// Salva a imagem no disco e devolve o nome do arquivo (que é guardado no banco)
-async function saveBase64Image(image) {
+// Salva a imagem no disco e devolve o nome do arquivo (que é guardado no banco).
+// Se o tipo não vier, usa a extensão padrão informada (a da imagem que está sendo trocada).
+async function saveBase64Image(image, defaultExtension = 'png') {
   await fs.mkdir(MEDIA_DIR, { recursive: true })
-  const filename = `${randomUUID()}.${EXTENSIONS[image.type]}`
+  const extension = EXTENSIONS[image.type] || defaultExtension
+  const filename = `${randomUUID()}.${extension}`
   const buffer = Buffer.from(cleanBase64(image.content), 'base64')
   await fs.writeFile(path.join(MEDIA_DIR, filename), buffer)
   return filename

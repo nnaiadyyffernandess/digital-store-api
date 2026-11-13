@@ -1,0 +1,8 @@
+{
+  "name": "Camiseta Adidas Básica Premium",
+  "slug": "camiseta-adidas-basica",
+  "price": 89.9,
+  "price_with_discount": 69.9,
+  "stock": 20,
+  "category_ids": [1, 3]
+}

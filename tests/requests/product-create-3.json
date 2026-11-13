@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "name": "Mochila Puma Urbana",
+  "slug": "mochila-puma-urbana",
+  "stock": 5,
+  "description": "Mochila resistente para o dia a dia.",
+  "price": 199.9,
+  "price_with_discount": 169.9,
+  "category_ids": [3],
+  "options": [
+    { "title": "Cor", "shape": "circle", "radius": 0, "type": "color", "values": ["#000", "#fff"] }
+  ]
+}
