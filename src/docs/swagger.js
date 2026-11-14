@@ -52,7 +52,7 @@ module.exports = {
       'As rotas com cadeado exigem token: faça login em POST /v1/user/token, ' +
       'clique em "Authorize" e cole o token.',
   },
-  servers: [{ url: 'http://localhost:3000', description: 'Servidor local' }],
+  servers: [{ url: '/', description: 'Servidor atual' }],
   tags: [
     { name: 'Usuários', description: 'Cadastro, consulta, atualização e exclusão de usuários' },
     { name: 'Autenticação', description: 'Geração do token de acesso' },
