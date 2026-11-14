@@ -38,7 +38,7 @@ const paginationParams = [
     name: 'fields',
     in: 'query',
     description: 'Campos que devem voltar na resposta, separados por vírgula',
-    schema: { type: 'string', example: 'name,price' },
+    schema: { type: 'string', example: 'id,name' },
   },
 ]
 
@@ -420,7 +420,7 @@ module.exports = {
     schemas: {
       Error: {
         type: 'object',
-        properties: { message: { type: 'string', example: 'Produto não encontrado' } },
+        properties: { message: { type: 'string', example: 'Descrição do erro' } },
       },
 
       Login: {
@@ -526,6 +526,11 @@ module.exports = {
       // Imagem enviada no cadastro ou na atualização
       ImageInput: {
         type: 'object',
+         example: {
+          type: 'image/png',
+          content:
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+        },
         properties: {
           id: { type: 'integer', description: 'Só na atualização: id da imagem existente' },
           type: {
@@ -545,6 +550,13 @@ module.exports = {
       // Opção enviada no cadastro ou na atualização
       OptionInput: {
         type: 'object',
+        example: {
+          title: 'Tamanho',
+          shape: 'square',
+          radius: 4,
+          type: 'text',
+          values: ['39', '40', '41'],
+        },
         properties: {
           id: { type: 'integer', description: 'Só na atualização: id da opção existente' },
           title: { type: 'string', example: 'Tamanho' },
