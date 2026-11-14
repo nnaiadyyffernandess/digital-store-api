@@ -74,6 +74,27 @@ npm start       # execução normal
 
 A API fica disponível em **http://localhost:3000** (ou na porta definida em `PORT`). Para conferir se está no ar, acesse `/health`.
 
+## Dados iniciais
+
+Antes de criar as categorias, cadastre um usuário e faça login, como explicado na seção "Documentação da API (Swagger)" mais abaixo. Depois, crie as categorias pelo Swagger (`POST /v1/category`) ou pelo `curl`. Troque `<token>` pelo token do login:
+
+```bash
+curl -X POST http://localhost:3000/v1/category \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Shoes", "slug": "shoes", "use_in_menu": true}'
+```
+
+As categorias usadas no projeto são:
+
+| Nome | Slug | `use_in_menu` |
+|---|---|---|
+| Shoes | `shoes` | `true` |
+| Black Friday | `black-friday` | `false` |
+| Offers | `offers` | `true` |
+
+Repita o comando acima para cada uma delas, trocando os dados do `-d`. Os produtos usam os ids das categorias (`category_ids`), então elas precisam existir antes de cadastrar um produto.
+
 ## Documentação da API (Swagger)
 
 Com a API rodando, abra **http://localhost:3000/api-docs** para ver e testar todas as rotas.
@@ -188,4 +209,4 @@ tests/requests/      exemplos de requisições em JSON
 
 ## Autoria
 
-Projeto desenvolvido por: [Náiady Fernandes]
+Projeto desenvolvido por: Náiady Fernandes
