@@ -34,7 +34,7 @@ Entre no MySQL (pelo terminal ou pelo MySQL Workbench) e execute:
 CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'digital_user'@'localhost' IDENTIFIED BY 'sua_senha_aqui';
 GRANT ALL PRIVILEGES ON digital_store.* TO 'digital_user'@'localhost';
-FLUSH PRIVILEGES;
+
 ```
 
 Se preferir, use outro nome de banco, usuário e senha, e coloque os mesmos valores no `.env`.
