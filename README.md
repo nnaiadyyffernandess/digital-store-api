@@ -174,6 +174,29 @@ GET /v1/product/search?match=camiseta&price-range=50-100&limit=5
 
 As imagens são enviadas em **base64** no cadastro e na atualização do produto. Elas são salvas na pasta `public/media` e ficam disponíveis em `http://localhost:3000/media/<arquivo>`. Ao excluir um produto, os arquivos das imagens também são apagados.
 
+## Testes automatizados
+
+Os testes usam **Jest** e **Supertest** e rodam num banco separado (`digital_store_test`), para não alterar os dados reais. Eles cobrem cadastro e login, proteção por token, categorias e o ciclo completo de um produto.
+
+Preparação (só na primeira vez):
+
+```sql
+CREATE DATABASE digital_store_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL PRIVILEGES ON digital_store_test.* TO 'digital_user'@'localhost';
+```
+
+```bash
+npx sequelize-cli db:migrate --env test
+```
+
+Para rodar os testes:
+
+```bash
+npm test
+```
+
+Se o nome do banco de testes for diferente, defina `DB_NAME_TEST` no `.env`. Por padrão, o nome usado é o `DB_NAME` seguido de `_test`.
+
 ## Códigos de resposta
 
 | Código | Quando acontece |
@@ -205,6 +228,7 @@ src/
 └── server.js        inicialização do servidor
 public/media/        imagens dos produtos
 tests/requests/      exemplos de requisições em JSON
+tests/               testes automatizados (Jest) e exemplos de requisições em JSON
 ```
 
 ## Autoria
